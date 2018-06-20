@@ -2,9 +2,6 @@
 buildscript {
     repositories {
         jcenter()
-        flatDir {
-	        dirs 'libs'
-	    }
     }
 
     dependencies {
@@ -32,11 +29,15 @@ android {
 repositories {
     mavenCentral()
 }
+// add project build.gradle
+// flatDir {
+//    dirs project(':react-native-alibaichuan-nevo').file('libs')
+// }
 
 dependencies {
     compile 'com.facebook.react:react-native:+'
-
     compile fileTree(dir: "libs", include: ["*.jar"])
+
     compile(name:'alibabauth_ui-1.4.3', ext:'aar')
     compile(name:'alibc_link_partner-1.1.0.6', ext:'aar')
     compile(name:'alibc_trade_biz-3.1.1.210', ext:'aar')
