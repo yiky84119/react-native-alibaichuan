@@ -347,19 +347,21 @@ public class RNAlibcSdkModule extends ReactContextBaseJavaModule {
     private AlibcShowParams dealShowParams(final ReadableMap param) {
         ReadableMap payload = param.getMap("payload");
         // 初始化参数
-        String opentype = "html5";
+        String opentype = "";
 
         AlibcShowParams showParams = new AlibcShowParams();
 
-        if (payload.getString("opentype") != null
-                || !payload.getString("opentype").equals("")) {
+        if (payload.hasKey("opentype") && payload.getString("opentype") != null
+                && !payload.getString("opentype").equals("")) {
             opentype = payload.getString("opentype");
         }
 
         if (opentype.equals("html5")) {
             showParams = new AlibcShowParams(OpenType.H5, true);
-        } else {
+        } else if (opentype.equals("native")) {
             showParams = new AlibcShowParams(OpenType.Native, true);
+        } else {
+            showParams = new AlibcShowParams(OpenType.Auto, true);
         }
 
         return showParams;
@@ -371,25 +373,24 @@ public class RNAlibcSdkModule extends ReactContextBaseJavaModule {
     private AlibcTaokeParams dealTaokeParams(final ReadableMap param) {
         ReadableMap payload = param.getMap("payload");
         // 初始化参数
-        String mmpid = "mm_23448739_6500158_22182062";
-        String adzoneid = "60538822";
-        String tkkey = "23482513";
+        String mmpid = "mm_45678468_9082620_293918217";
+        String adzoneid = "293918217";
+        String tkkey = "23212759";
+
 
         // 设置mmpid
-        if (payload.getString("mmpid") != null
-                || !payload.getString("mmpid").equals("")) {
+        if (payload.hasKey("mmpid") && payload.getString("mmpid") != null
+                && !payload.getString("mmpid").equals("")) {
             mmpid = payload.getString("mmpid");
         }
-
         // 设置adzoneid
-        if (payload.getString("adzoneid") != null
-                || !payload.getString("adzoneid").equals("")) {
+        if (payload.hasKey("adzoneid") && payload.getString("adzoneid") != null
+                && !payload.getString("adzoneid").equals("")) {
             adzoneid = payload.getString("adzoneid");
         }
-
         // 设置tkkey
-        if (payload.getString("tkkey") != null
-                || !payload.getString("tkkey").equals("")) {
+        if (payload.hasKey("tkkey") && payload.getString("tkkey") != null
+                && !payload.getString("tkkey").equals("")) {
             tkkey = payload.getString("tkkey");
         }
 
@@ -411,8 +412,8 @@ public class RNAlibcSdkModule extends ReactContextBaseJavaModule {
         Map<String, String> exParams = new HashMap<String, String>();
         String isvcode = "app";
         // 设置tkkey
-        if (payload.getString("isvcode") != null
-                || !payload.getString("isvcode").equals("")) {
+        if (payload.hasKey("isvcode") && payload.getString("isvcode") != null
+                && !payload.getString("isvcode").equals("")) {
             isvcode = payload.getString("isvcode");
         }
         exParams.put(AlibcConstants.ISV_CODE, isvcode);
